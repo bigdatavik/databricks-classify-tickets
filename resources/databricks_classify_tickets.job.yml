@@ -54,6 +54,6 @@ resources:
           # Full documentation of this spec can be found at:
           # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
           spec:
-            environment_version: "1.0"
+            client: "2"
             dependencies:
               - ../dist/*.whl

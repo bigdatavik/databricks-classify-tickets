@@ -72,7 +72,7 @@ resources:
       environments:
         - environment_key: "notebook_env"
           spec:
-            environment_version: "1.0"
+            client: "2"
             dependencies:
               - "../dist/*.whl"
             # Add any additional libraries if needed
