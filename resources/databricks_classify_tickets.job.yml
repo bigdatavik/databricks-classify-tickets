@@ -47,13 +47,6 @@ resources:
         #   pipeline_task:
         #     pipeline_id: ${resources.pipelines.databricks_classify_tickets_pipeline.id}
 
-      # A list of task execution environment specifications that can be referenced by tasks of this job.
-      environments:
-        - environment_key: default
-
-          # Full documentation of this spec can be found at:
-          # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
-          spec:
-            client: "2"
-            dependencies:
-              - ../dist/*.whl
+      # Use traditional cluster instead of serverless environment
+      # Jobs will use the default cluster or you can specify a cluster_id
+      # cluster_id: "your-cluster-id"  # Uncomment and specify if you want a specific cluster

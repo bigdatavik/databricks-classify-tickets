@@ -5,7 +5,7 @@ resources:
       name: databricks_classify_tickets_pipeline
       catalog: quickstart_catalog_vkm_external
       schema: classify_tickets
-      serverless: true
+      serverless: false
       libraries:
         - notebook:
             path: ../src/databricks_classify_tickets/validation_summary.ipynb

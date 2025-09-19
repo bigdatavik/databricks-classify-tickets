@@ -68,14 +68,6 @@ resources:
           timeout_seconds: 900  # 15 minutes
           max_retries: 1
 
-      # Environment configuration
-      environments:
-        - environment_key: "notebook_env"
-          spec:
-            client: "2"
-            dependencies:
-              - "../dist/*.whl"
-            # Add any additional libraries if needed
-            # libraries:
-            #   - pypi:
-            #       package: "additional-package"
+      # Use traditional cluster instead of serverless environment
+      # Jobs will use the default cluster or you can specify a cluster_id
+      # cluster_id: "your-cluster-id"  # Uncomment and specify if you want a specific cluster
