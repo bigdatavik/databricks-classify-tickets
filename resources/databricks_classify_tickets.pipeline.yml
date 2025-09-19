@@ -8,7 +8,7 @@ resources:
       serverless: true
       libraries:
         - notebook:
-            path: ../src/pipeline.ipynb
+            path: ../src/databricks_classify_tickets/validation_summary.ipynb
 
       configuration:
         bundle.sourcePath: ${workspace.file_path}/src

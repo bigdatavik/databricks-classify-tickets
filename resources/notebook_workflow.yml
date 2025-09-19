@@ -64,7 +64,7 @@ resources:
           depends_on:
             - task_key: "03_ai_classification"
           notebook_task:
-            notebook_path: "../src/validation_summary.ipynb"
+            notebook_path: "../src/databricks_classify_tickets/validation_summary.ipynb"
           timeout_seconds: 900  # 15 minutes
           max_retries: 1
 
