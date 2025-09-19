@@ -1,0 +1,14 @@
+# The main pipeline for databricks_classify_tickets
+resources:
+  pipelines:
+    databricks_classify_tickets_pipeline:
+      name: databricks_classify_tickets_pipeline
+      catalog: system
+      schema: databricks_classify_tickets_${bundle.target}
+      serverless: true
+      libraries:
+        - notebook:
+            path: ../src/pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
