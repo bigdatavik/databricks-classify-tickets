@@ -1,4 +1,4 @@
-# The main job for databricks_classify_tickets.
+# The main job for databricks_classify_tickets - Sequential Notebook Workflow
 resources:
   jobs:
     databricks_classify_tickets_job:
@@ -15,23 +15,37 @@ resources:
       #    - your_email@example.com
 
       tasks:
-        - task_key: notebook_task
+        # Step 1: Generate sample ticket data
+        - task_key: generate_sample_data
           notebook_task:
-            notebook_path: ../src/notebook.ipynb
+            notebook_path: ../src/databricks_classify_tickets/01_sample_data_generation.ipynb
+            base_parameters:
+              # Optional: Add any parameters needed for data generation
+              num_tickets: "10"
+          timeout_seconds: 1800  # 30 minutes timeout
 
+        # Step 2: Extract action items from tickets (depends on step 1)
+        - task_key: extract_action_items
+          depends_on:
+            - task_key: generate_sample_data
+          notebook_task:
+            notebook_path: ../src/databricks_classify_tickets/02_action_extraction.ipynb
+          timeout_seconds: 3600  # 60 minutes timeout (AI processing can take time)
+
+        # Step 3: AI-powered classification (depends on step 2)
+        - task_key: ai_classification
+          depends_on:
+            - task_key: extract_action_items
+          notebook_task:
+            notebook_path: ../src/databricks_classify_tickets/03_ai_classification.ipynb
+          timeout_seconds: 1800  # 30 minutes timeout
+
+        # Optional: Refresh pipeline after all notebooks complete
         - task_key: refresh_pipeline
           depends_on:
-            - task_key: notebook_task
+            - task_key: ai_classification
           pipeline_task:
             pipeline_id: ${resources.pipelines.databricks_classify_tickets_pipeline.id}
-
-        - task_key: main_task
-          depends_on:
-            - task_key: refresh_pipeline
-          environment_key: default
-          python_wheel_task:
-            package_name: databricks_classify_tickets
-            entry_point: main
 
       # A list of task execution environment specifications that can be referenced by tasks of this job.
       environments:
@@ -40,6 +54,5 @@ resources:
           # Full documentation of this spec can be found at:
           # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
           spec:
-            client: "2"
             dependencies:
               - ../dist/*.whl
