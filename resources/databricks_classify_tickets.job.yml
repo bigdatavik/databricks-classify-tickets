@@ -40,12 +40,12 @@ resources:
             notebook_path: ../src/databricks_classify_tickets/03_ai_classification.ipynb
           timeout_seconds: 1800  # 30 minutes timeout
 
-        # Optional: Refresh pipeline after all notebooks complete
-        - task_key: refresh_pipeline
-          depends_on:
-            - task_key: ai_classification
-          pipeline_task:
-            pipeline_id: ${resources.pipelines.databricks_classify_tickets_pipeline.id}
+        # Optional: Refresh pipeline after all notebooks complete (commented out to avoid system catalog issues)
+        # - task_key: refresh_pipeline
+        #   depends_on:
+        #     - task_key: ai_classification
+        #   pipeline_task:
+        #     pipeline_id: ${resources.pipelines.databricks_classify_tickets_pipeline.id}
 
       # A list of task execution environment specifications that can be referenced by tasks of this job.
       environments:

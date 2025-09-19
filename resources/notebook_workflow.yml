@@ -58,7 +58,7 @@ resources:
           max_retries: 2
           retry_on_timeout: true
 
-        # Task 4: Validation and Summary (Optional)
+        # Task 4: Validation and Summary
         - task_key: "04_validation"
           description: "Validate results and generate summary report"
           depends_on:

@@ -10,8 +10,10 @@ artifacts:
     build: uv build --wheel
 
 include:
-  - resources/*.yml
-  - resources/*/*.yml
+  - resources/databricks_classify_tickets.job.yml
+  - resources/notebook_workflow.yml
+  # Pipeline is optional - uncomment if you need it
+  # - resources/databricks_classify_tickets.pipeline.yml
 
 targets:
   dev:
