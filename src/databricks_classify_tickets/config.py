@@ -19,7 +19,10 @@ TABLES = {
     "action_items_ai_classified": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.action_items_ai_classified",
     "tickets_classified_final": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.tickets_classified_final",
     "action_items_classified_final": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.action_items_classified_final",
-    "ai_showcase_results": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.ai_showcase_results"
+    "ai_showcase_results": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.ai_showcase_results",
+    "dashboard_priority_distribution": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.dashboard_priority_distribution",
+    "dashboard_system_health": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.dashboard_system_health",
+    "dashboard_resource_allocation": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.dashboard_resource_allocation"
 }
 
 # Databricks Configuration

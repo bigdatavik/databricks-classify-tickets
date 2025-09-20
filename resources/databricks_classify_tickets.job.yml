@@ -45,6 +45,17 @@ resources:
           max_retries: 2
           retry_on_timeout: true
 
+        # Task 3: Business Insights & Decision Making
+        - task_key: "03_business_insights"
+          description: "Transform AI analysis into actionable business decisions and dashboard data"
+          depends_on:
+            - task_key: "02_ai_showcase"
+          notebook_task:
+            notebook_path: "../src/databricks_classify_tickets/03_business_insights.ipynb"
+          timeout_seconds: 1800  # 30 minutes (analytics processing)
+          max_retries: 2
+          retry_on_timeout: true
+
       # Use traditional cluster instead of serverless environment
       # Jobs will use the default cluster or you can specify a cluster_id
       # cluster_id: "your-cluster-id"  # Uncomment and specify if you want a specific cluster
