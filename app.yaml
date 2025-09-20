@@ -1,10 +1,14 @@
 command: ['streamlit', 'run', 'app.py', '--server.port=8501', '--server.address=0.0.0.0']
 env:
   - name: 'DATABRICKS_WAREHOUSE_ID'
-    value: '148ccb90800933a1'
+    valueFrom: "sql-warehouse"
   - name: 'STREAMLIT_GATHER_USAGE_STATS'
     value: 'false'
   - name: 'STREAMLIT_SERVER_HEADLESS'
     value: 'true'
   - name: 'STREAMLIT_SERVER_ENABLE_CORS'
     value: 'false'
+  - name: 'UNITY_CATALOG_NAME'
+    value: 'quickstart_catalog_vkm_external'
+  - name: 'UNITY_SCHEMA_NAME'
+    value: 'classify_tickets'

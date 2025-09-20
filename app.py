@@ -158,6 +158,10 @@ st.markdown("""
 # Initialize Databricks configuration
 cfg = Config()
 
+# Get catalog and schema from environment variables
+CATALOG_NAME = os.getenv("UNITY_CATALOG_NAME", "quickstart_catalog_vkm_external")
+SCHEMA_NAME = os.getenv("UNITY_SCHEMA_NAME", "classify_tickets")
+
 @st.cache_resource
 def get_connection(http_path):
     """Create a cached SQL connection to Databricks"""
@@ -203,10 +207,10 @@ def main():
         # Table selection
         st.markdown('<h3 style="color: white;">📊 Data Sources</h3>', unsafe_allow_html=True)
         table_options = [
-            "quickstart_catalog_vkm_external.classify_tickets.ai_showcase_results",
-            "quickstart_catalog_vkm_external.classify_tickets.dashboard_priority_distribution",
-            "quickstart_catalog_vkm_external.classify_tickets.dashboard_system_health",
-            "quickstart_catalog_vkm_external.classify_tickets.dashboard_resource_allocation"
+            f"{CATALOG_NAME}.{SCHEMA_NAME}.ai_showcase_results",
+            f"{CATALOG_NAME}.{SCHEMA_NAME}.dashboard_priority_distribution",
+            f"{CATALOG_NAME}.{SCHEMA_NAME}.dashboard_system_health",
+            f"{CATALOG_NAME}.{SCHEMA_NAME}.dashboard_resource_allocation"
         ]
         
         selected_table = st.selectbox(

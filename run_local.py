@@ -14,9 +14,13 @@ def main():
     os.environ['DATABRICKS_WAREHOUSE_ID'] = '148ccb90800933a1'
     os.environ['STREAMLIT_GATHER_USAGE_STATS'] = 'false'
     os.environ['DATABRICKS_CONFIG_PROFILE'] = 'DEFAULT'
+    os.environ['UNITY_CATALOG_NAME'] = 'quickstart_catalog_vkm_external'
+    os.environ['UNITY_SCHEMA_NAME'] = 'classify_tickets'
     
     print("🚀 Starting AI Ticket Classification Dashboard locally...")
     print(f"📊 Warehouse ID: {os.environ['DATABRICKS_WAREHOUSE_ID']}")
+    print(f"🗄️  Catalog: {os.environ['UNITY_CATALOG_NAME']}")
+    print(f"📁 Schema: {os.environ['UNITY_SCHEMA_NAME']}")
     print(f"🔐 Using Databricks profile: {os.environ['DATABRICKS_CONFIG_PROFILE']}")
     print("🌐 Open your browser to: http://localhost:8501")
     print("=" * 60)
