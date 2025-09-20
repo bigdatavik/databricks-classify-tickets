@@ -1,72 +1,110 @@
-# 🚀 Databricks Workflow Deployment Guide
+# 🚀 AI Ticket Classification Dashboard - Deployment Guide
 
-This guide explains how to deploy and run the three notebooks in sequence using Databricks Asset Bundles.
+This comprehensive guide covers deploying the complete AI Ticket Classification system, including the Databricks workflow and the stunning Streamlit dashboard.
 
-## 📋 Workflow Overview
+## 📋 Project Overview
 
-The workflow runs three notebooks in sequence:
+The project consists of two main components:
 
-1. **01_sample_data_generation.ipynb** - Generates realistic ticket data
-2. **02_action_extraction.ipynb** - Extracts action items using AI
-3. **03_ai_classification.ipynb** - Performs AI-powered classification
-4. **validation_summary.ipynb** - Validates results and provides summary
+### 1. 🤖 Databricks AI Workflow
+- **01_sample_data_generation.ipynb** - Generates realistic ticket data
+- **02_ai_showcase.ipynb** - Demonstrates all three AI functions (ai_classify, ai_extract, ai_gen)
+- **03_business_insights.ipynb** - Generates business insights and dashboard data
+
+### 2. 🎨 Streamlit Dashboard
+- **Interactive Visualizations** - Plotly charts and animated metrics
+- **Real-time Data** - Live connection to Unity Catalog
+- **Business Intelligence** - Priority analysis, system health, resource allocation
+- **Beautiful UI** - Modern design with animations and professional styling
 
 ## 🔧 Configuration Files
 
-### 1. Main Job Configuration
+### 1. Databricks Job Configuration
 - **File**: `resources/databricks_classify_tickets.job.yml`
-- **Purpose**: Primary workflow with basic sequential execution
-- **Features**: Simple dependencies, timeouts, retry logic
+- **Purpose**: AI workflow with sequential execution
+- **Features**: Job clusters, timeouts, retry logic, email notifications
 
-### 2. Advanced Workflow Configuration
-- **File**: `resources/notebook_workflow.yml`
-- **Purpose**: Enhanced workflow with better error handling
-- **Features**: Email notifications, detailed logging, validation step
+### 2. Streamlit App Configuration
+- **File**: `app.yaml`
+- **Purpose**: Streamlit app runtime configuration
+- **Features**: Environment variables, port configuration, command setup
+
+### 3. Asset Bundle Configuration
+- **File**: `databricks.yml`
+- **Purpose**: Main bundle configuration
+- **Features**: Target environments, resource definitions
 
 ## 🚀 Deployment Steps
 
-### Step 1: Deploy the Bundle
+### Step 1: Prerequisites
+```bash
+# Install Databricks CLI
+pip install databricks-cli
+
+# Configure authentication
+databricks configure --profile DEFAULT
+
+# Install project dependencies
+pip install -r requirements.txt
+```
+
+### Step 2: Deploy the Databricks Workflow
 ```bash
 # Deploy to development environment
-databricks bundle deploy
+databricks bundle deploy --target dev
 
 # Deploy to production environment
 databricks bundle deploy --target prod
 ```
 
-### Step 2: Run the Workflow
+### Step 3: Run the AI Workflow
 ```bash
-# Run the main job
-databricks jobs run-now --job-id <job_id>
+# Run the complete workflow
+databricks bundle run
 
-# Or run the advanced workflow
-databricks jobs run-now --job-id <advanced_job_id>
+# Or run individual jobs
+databricks jobs run-now --job-id <job_id>
 ```
 
-### Step 3: Monitor Execution
-- Check the Databricks Jobs UI for execution status
-- View logs for each task in the workflow
-- Monitor email notifications for failures/success
+### Step 4: Deploy the Streamlit Dashboard
+```bash
+# Deploy the Streamlit app to Databricks
+databricks bundle deploy --target dev
+
+# Or run locally for development
+python run_local.py
+```
+
+### Step 5: Access the Dashboard
+- **Databricks**: Access through Databricks Apps
+- **Local**: Open http://localhost:8501
+- **Production**: Use your Databricks workspace URL
 
 ## 📊 Workflow Dependencies
 
 ```
 01_data_generation
     ↓
-02_action_extraction
+02_ai_showcase (ai_classify, ai_extract, ai_gen)
     ↓
-03_ai_classification
+03_business_insights (dashboard data generation)
     ↓
-04_validation (optional)
+Streamlit Dashboard (real-time visualization)
 ```
 
 ## ⚙️ Configuration Options
 
-### Timeouts
+### Databricks Job Timeouts
 - **Data Generation**: 30 minutes
-- **Action Extraction**: 60 minutes (AI processing)
-- **AI Classification**: 30 minutes
-- **Validation**: 15 minutes
+- **AI Showcase**: 60 minutes (AI processing)
+- **Business Insights**: 30 minutes
+- **Total Workflow**: 2 hours
+
+### Streamlit Dashboard Configuration
+- **Port**: 8501 (default)
+- **Host**: 0.0.0.0 (for Databricks deployment)
+- **Warehouse ID**: 148ccb90800933a1
+- **Profile**: DEFAULT
 
 ### Retry Logic
 - **Max Retries**: 2 per task
@@ -74,9 +112,30 @@ databricks jobs run-now --job-id <advanced_job_id>
 - **Exponential Backoff**: Automatic
 
 ### Notifications
-- **On Failure**: Email alerts
-- **On Success**: Optional email confirmation
+- **On Failure**: Email alerts to vik.malhotra@databricks.com
+- **On Success**: Email confirmation
 - **Logging**: Detailed task logs
+
+## 🎨 Streamlit Dashboard Features
+
+### Visual Components
+- **Interactive Charts**: Plotly visualizations
+- **Animated Metrics**: Real-time KPI cards
+- **Gradient Headers**: Beautiful text effects
+- **Color-coded Alerts**: Status indicators
+- **Responsive Design**: Mobile-friendly interface
+
+### Data Sources
+- **Unity Catalog Tables**: Real-time data access
+- **SQL Warehouse**: Live data connectivity
+- **Cached Connections**: Optimized performance
+- **Error Handling**: Robust data loading
+
+### Business Intelligence
+- **Priority Analysis**: Interactive distribution charts
+- **System Health**: Gauge charts and health indicators
+- **Resource Allocation**: Scatter plots and recommendations
+- **Executive Summary**: High-level insights
 
 ## 🔍 Monitoring and Troubleshooting
 
