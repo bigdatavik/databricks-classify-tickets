@@ -11,9 +11,6 @@ artifacts:
 
 include:
   - resources/databricks_classify_tickets.job.yml
-  - resources/notebook_workflow.yml
-  # Pipeline is optional - uncomment if you need it
-  # - resources/databricks_classify_tickets.pipeline.yml
 
 targets:
   dev:

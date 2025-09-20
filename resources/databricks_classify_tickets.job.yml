@@ -1,43 +1,49 @@
-# The main job for databricks_classify_tickets - Sequential Notebook Workflow
+# Databricks AI Functions Showcase - Simple Workflow
 resources:
   jobs:
-    databricks_classify_tickets_job:
-      name: databricks_classify_tickets_job
+    ai_showcase_workflow:
+      name: "AI Functions Showcase - Ticket Classification"
+      description: "Demonstrates ai_classify, ai_extract, and ai_gen with ticket data"
 
-      trigger:
-        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
-        periodic:
-          interval: 1
-          unit: DAYS
+      # Optional: Run on demand or schedule
+      # trigger:
+      #   periodic:
+      #     interval: 1
+      #     unit: DAYS
 
-      #email_notifications:
-      #  on_failure:
-      #    - your_email@example.com
+      # Email notifications for failures
+      email_notifications:
+        on_failure:
+          - vik.malhotra@databricks.com
+        on_success:
+          - vik.malhotra@databricks.com
+
+      # Job-level timeout
+      timeout_seconds: 7200  # 2 hours total
 
       tasks:
-        # Step 1: Generate sample ticket data
-        - task_key: generate_sample_data
+        # Task 1: Generate Sample Data
+        - task_key: "01_data_generation"
+          description: "Generate realistic ticket data for AI processing"
           notebook_task:
-            notebook_path: ../src/databricks_classify_tickets/01_sample_data_generation.ipynb
+            notebook_path: "../src/databricks_classify_tickets/01_sample_data_generation.ipynb"
             base_parameters:
-              # Optional: Add any parameters needed for data generation
               num_tickets: "10"
-          timeout_seconds: 1800  # 30 minutes timeout
+              data_quality: "realistic"
+          timeout_seconds: 1800  # 30 minutes
+          max_retries: 2
+          retry_on_timeout: true
 
-        # Step 2: Extract action items from tickets (depends on step 1)
-        - task_key: ai_showcase
+        # Task 2: AI Functions Showcase
+        - task_key: "02_ai_showcase"
+          description: "Comprehensive AI functions demonstration - ai_classify, ai_extract, ai_gen"
           depends_on:
-            - task_key: generate_sample_data
+            - task_key: "01_data_generation"
           notebook_task:
-            notebook_path: ../src/databricks_classify_tickets/02_ai_showcase.ipynb
-          timeout_seconds: 3600  # 60 minutes timeout (AI processing can take time)
-
-        # Optional: Refresh pipeline after all notebooks complete (commented out to avoid system catalog issues)
-        # - task_key: refresh_pipeline
-        #   depends_on:
-        #     - task_key: ai_classification
-        #   pipeline_task:
-        #     pipeline_id: ${resources.pipelines.databricks_classify_tickets_pipeline.id}
+            notebook_path: "../src/databricks_classify_tickets/02_ai_showcase.ipynb"
+          timeout_seconds: 3600  # 60 minutes (AI processing)
+          max_retries: 2
+          retry_on_timeout: true
 
       # Use traditional cluster instead of serverless environment
       # Jobs will use the default cluster or you can specify a cluster_id
