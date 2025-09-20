@@ -36,37 +36,16 @@ resources:
           max_retries: 2
           retry_on_timeout: true
 
-        # Task 2: Extract Action Items
-        - task_key: "02_action_extraction"
-          description: "Extract action items, priorities, and timelines using AI"
+        # Task 2: AI Functions Showcase
+        - task_key: "02_ai_showcase"
+          description: "Comprehensive AI functions demonstration - ai_classify, ai_extract, ai_gen"
           depends_on:
             - task_key: "01_data_generation"
           notebook_task:
-            notebook_path: "../src/databricks_classify_tickets/02_action_extraction.ipynb"
+            notebook_path: "../src/databricks_classify_tickets/02_ai_showcase.ipynb"
           timeout_seconds: 3600  # 60 minutes (AI processing)
           max_retries: 2
           retry_on_timeout: true
-
-        # Task 3: AI Classification
-        - task_key: "03_ai_classification"
-          description: "Perform AI-powered classification and final processing"
-          depends_on:
-            - task_key: "02_action_extraction"
-          notebook_task:
-            notebook_path: "../src/databricks_classify_tickets/03_ai_classification.ipynb"
-          timeout_seconds: 1800  # 30 minutes
-          max_retries: 2
-          retry_on_timeout: true
-
-        # Task 4: Validation and Summary
-        - task_key: "04_validation"
-          description: "Validate results and generate summary report"
-          depends_on:
-            - task_key: "03_ai_classification"
-          notebook_task:
-            notebook_path: "../src/databricks_classify_tickets/validation_summary.ipynb"
-          timeout_seconds: 900  # 15 minutes
-          max_retries: 1
 
       # Use traditional cluster instead of serverless environment
       # Jobs will use the default cluster or you can specify a cluster_id

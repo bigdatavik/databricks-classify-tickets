@@ -25,20 +25,12 @@ resources:
           timeout_seconds: 1800  # 30 minutes timeout
 
         # Step 2: Extract action items from tickets (depends on step 1)
-        - task_key: extract_action_items
+        - task_key: ai_showcase
           depends_on:
             - task_key: generate_sample_data
           notebook_task:
-            notebook_path: ../src/databricks_classify_tickets/02_action_extraction.ipynb
+            notebook_path: ../src/databricks_classify_tickets/02_ai_showcase.ipynb
           timeout_seconds: 3600  # 60 minutes timeout (AI processing can take time)
-
-        # Step 3: AI-powered classification (depends on step 2)
-        - task_key: ai_classification
-          depends_on:
-            - task_key: extract_action_items
-          notebook_task:
-            notebook_path: ../src/databricks_classify_tickets/03_ai_classification.ipynb
-          timeout_seconds: 1800  # 30 minutes timeout
 
         # Optional: Refresh pipeline after all notebooks complete (commented out to avoid system catalog issues)
         # - task_key: refresh_pipeline

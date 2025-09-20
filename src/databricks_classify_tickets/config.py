@@ -18,7 +18,8 @@ TABLES = {
     "tickets_ai_classified": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.tickets_ai_classified",
     "action_items_ai_classified": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.action_items_ai_classified",
     "tickets_classified_final": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.tickets_classified_final",
-    "action_items_classified_final": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.action_items_classified_final"
+    "action_items_classified_final": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.action_items_classified_final",
+    "ai_showcase_results": f"{UNITY_CATALOG['catalog_name']}.{UNITY_CATALOG['schema_name']}.ai_showcase_results"
 }
 
 # Databricks Configuration
