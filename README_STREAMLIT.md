@@ -32,9 +32,9 @@ A Streamlit dashboard that transforms AI analysis into actionable business insig
    pip install -r requirements.txt
    ```
 
-2. **Set environment variables:**
+2. **Configure Databricks profile:**
    ```bash
-   export DATABRICKS_WAREHOUSE_ID='148ccb90800933a1'
+   databricks configure --profile DEFAULT
    ```
 
 3. **Run locally:**
@@ -44,6 +44,7 @@ A Streamlit dashboard that transforms AI analysis into actionable business insig
    
    Or manually:
    ```bash
+   export DATABRICKS_WAREHOUSE_ID='148ccb90800933a1'
    streamlit run app.py
    ```
 
@@ -82,6 +83,7 @@ The dashboard connects to these Unity Catalog tables:
 ### Environment Variables
 
 - `DATABRICKS_WAREHOUSE_ID` - SQL Warehouse ID (default: 148ccb90800933a1)
+- `DATABRICKS_CONFIG_PROFILE` - Databricks profile (default: DEFAULT)
 - `STREAMLIT_GATHER_USAGE_STATS` - Disable usage tracking (default: false)
 
 ### app.yaml
