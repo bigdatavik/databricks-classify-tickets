@@ -13,4 +13,15 @@
         "**/__pycache__": true,
         ".pytest_cache": true,
     },
+    "sqltools.connections": [
+        {
+            "connectionMethod": "VS Code Extension (beta)",
+            "catalog": "quickstart_catalog_vkm_external",
+            "previewLimit": 50,
+            "driver": "Databricks",
+            "name": "Shared Endpoint",
+            "path": "/sql/1.0/warehouses/148ccb90800933a1",
+            "schema": "classify_tickets"
+        }
+    ],
 }
